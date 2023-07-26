@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-volume
+  labels:
+    type: local
+    name: mysql-volume
+spec:
+  storageClassName: mysql-volume
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 100Mi
+  hostPath:
+    type: DirectoryOrCreate
+    path: /var/lib/mysql
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ftps-volume
+  labels:
+    type: local
+    name: ftps-volume
+spec:
+  storageClassName: ftps-volume
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 100Mi
+  hostPath:
+    path: /home/usr
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: influxdb-volume
+  labels:
+    type: local
+    name: influxdb-volume
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: influxdb-volume
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 200Mi
+  hostPath:
+    type: DirectoryOrCreate
+    path: /var/lib/influxdb
